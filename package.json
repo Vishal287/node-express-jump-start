@@ -13,6 +13,7 @@
   "author": "Vishal Parmar",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.3",
     "express": "^4.21.2",
     "express-validator": "^7.2.0",
     "mongoose": "^8.9.2"
