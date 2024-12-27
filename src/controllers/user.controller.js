@@ -1,21 +1,24 @@
 /******************
  * Helpers
  ******************/
-const { addUser, getUsers } = require("../helpers/app.helper");
+const { addUser, getUsers } = require("../helpers/user.helper");
 
 /************************
  * Controller functions
  ************************/
-function createUser(req, res) {
-  console.log("----------", req.body);
-  const userObj = {};
+async function createUser(req, res) {
+  const userObj = {
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+  };
 
-  const createdUser = addUser(userObj);
+  const createdUser = await addUser(userObj);
   res.status(201).send(createdUser);
 }
 
-function users(req, res) {
-  const users = getUsers();
+async function users(req, res) {
+  const users = await getUsers();
   res.send(users);
 }
 
