@@ -2,7 +2,11 @@
  * 3rd party libraries
  ************************/
 const mongoose = require("mongoose");
+const bcrytp = require("bcrypt");
 
+/************************
+ * Schema
+ ************************/
 const UserSchema = new mongoose.Schema({
   name: {
     first: { type: String },
@@ -12,11 +16,11 @@ const UserSchema = new mongoose.Schema({
   password: { type: String },
 });
 
+UserSchema.pre("save", async function (next) {
+  this.password = await bcrytp.hash(this.password, 10);
+  next();
+});
+
 const User = mongoose.model("user", UserSchema);
 
-User.on("save", () => {
-  if (this.password) {
-    this.password = this.password.replace("@", "##");
-  }
-});
 module.exports = User;

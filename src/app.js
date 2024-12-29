@@ -4,6 +4,7 @@
 const Express = require("express");
 const app = Express();
 const bodyParser = require("body-parser");
+const dotEnv = require("dotenv");
 
 /******************
  * Routes
@@ -13,7 +14,7 @@ const { body } = require("express-validator");
 /******************
  * configurations
  ******************/
-
+dotEnv.config();
 app.use(bodyParser.json());
 app.use("/api", routes);
 
